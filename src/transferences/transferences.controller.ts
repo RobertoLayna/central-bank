@@ -5,7 +5,7 @@ import { UpdateTransferenceDto } from './dto/update-transference.dto';
 
 @Controller('transferences')
 export class TransferencesController {
-  constructor(private readonly transferencesService: TransferencesService) {}
+  constructor(private readonly transferencesService: TransferencesService) { }
 
   @Post()
   create(@Body() createTransferenceDto: CreateTransferenceDto) {

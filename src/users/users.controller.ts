@@ -11,6 +11,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from 'src/auth/constants';
+import { info, log } from 'console';
 
 @Controller('users')
 export class UsersController {
@@ -19,8 +20,6 @@ export class UsersController {
   @Public()
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    console.log('User:', createUserDto);
-
     let result: CreateUserDto;
     try {
       result = await this.usersService.create(createUserDto);
@@ -28,6 +27,7 @@ export class UsersController {
       console.log(err);
       return { status: 'Fail', message: err.sqlMessage, errors: [] };
     }
+    info(`Usuario ${createUserDto.email} fue creado!`)
     return { status: 'Success', data: result };
   }
 

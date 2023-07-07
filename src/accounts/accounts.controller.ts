@@ -16,19 +16,8 @@ import { UpdateAccountDto } from './dto/update-account.dto';
 export class AccountsController {
   constructor(private readonly accountsService: AccountsService) { }
 
-  @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return 'NA'; //this.accountsService.create(createAccountDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.accountsService.findAll();
-  }
-
   @Get('/me')
   async findOne(@Request() req) {
-    console.log(req.user)
     return {
       status: 'Sucess', data: await this.accountsService.findOne(req.user.id)
     };
