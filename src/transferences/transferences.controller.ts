@@ -1,34 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
 import { TransferencesService } from './transferences.service';
 import { CreateTransferenceDto } from './dto/create-transference.dto';
-import { UpdateTransferenceDto } from './dto/update-transference.dto';
 
 @Controller('transferences')
 export class TransferencesController {
   constructor(private readonly transferencesService: TransferencesService) { }
 
   @Post()
-  create(@Body() createTransferenceDto: CreateTransferenceDto) {
-    return this.transferencesService.create(createTransferenceDto);
+  async create(@Request() req, @Body() createTransferenceDto: CreateTransferenceDto) {
+    return {
+      status: 'Success', message: await this.transferencesService.create(req.user.id, createTransferenceDto), data: { amount: createTransferenceDto.amount }
+    };
   }
 
   @Get()
-  findAll() {
-    return this.transferencesService.findAll();
+  async findAll(@Request() req) {
+    return {
+      status: 'Success', data: await this.transferencesService.findAll(req.user.id)
+    };
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.transferencesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTransferenceDto: UpdateTransferenceDto) {
-    return this.transferencesService.update(+id, updateTransferenceDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.transferencesService.remove(+id);
   }
 }

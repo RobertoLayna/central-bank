@@ -13,6 +13,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { Account } from './accounts/entities/account.entity';
 import { Card } from './accounts/entities/card.entity';
+import { Transference } from './transferences/entities/transference.entity';
 
 const Database: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -22,7 +23,7 @@ const Database: TypeOrmModuleOptions = {
   password: 'root',
   database: 'central_bank',
   synchronize: true,
-  entities: [Bank, User, Account, Card],
+  entities: [Bank, User, Account, Card, Transference],
 };
 @Module({
   imports: [
