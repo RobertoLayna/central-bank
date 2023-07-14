@@ -21,7 +21,9 @@ export class TransferencesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.transferencesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return {
+      status: 'Success', data: await this.transferencesService.findOne(+id)
+    };
   }
 }

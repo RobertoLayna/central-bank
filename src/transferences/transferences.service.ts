@@ -55,10 +55,10 @@ export class TransferencesService {
   }
 
   findAll(id: number) {
-    return this.transferRepository.find({ where: [{ id_sender: id }, { id_receptor: id }] });
+    return this.transferRepository.find({ select: { amount: true, id: true }, where: [{ id_sender: id }, { id_receptor: id }] });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} transference`;
+    return this.transferRepository.findOne({ where: { id: id } });
   }
 }
