@@ -13,7 +13,7 @@ export class UsersService {
     private userRepository: Repository<User>,
     @Inject(AccountsService)
     private readonly accountService: AccountsService,
-  ) {}
+  ) { }
 
   async create(createUserDto: CreateUserDto) {
     const newUser: User = {
@@ -44,23 +44,16 @@ export class UsersService {
     return insertResult;
   }
 
-  getRandomNumber(digit) {
+  getRandomNumber(digit: number) {
     return Math.random().toFixed(digit).split('.')[1];
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findOne(id: number) {
+    return await this.userRepository.findOne({ where: { id: id } });
   }
 
-  async findOne(phone: string) {
-    return await this.userRepository.findOne({ where: { phone: phone } });
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    return await this.userRepository.update({ id: id }, updateUserDto);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
 }

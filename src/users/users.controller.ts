@@ -32,14 +32,10 @@ export class UsersController {
     return { status: 'Success', data: result };
   }
 
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
-  }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return 'No'; //this.usersService.findOne(+id);
+  @Get()
+  findOne(@Request() req) {
+    return this.usersService.findOne(req.user.id);
   }
 
   @Patch()
