@@ -20,7 +20,7 @@ const Database: TypeOrmModuleOptions = {
   port: 5432,
   username: 'default',
   password: 'W7HbQwVtUi6M',
-  database: 'central_bank',
+  database: 'verceldb',
   synchronize: true,
   entities: [Bank, User, Account, Card, Transference],
 };
