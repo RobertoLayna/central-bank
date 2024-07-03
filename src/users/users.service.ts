@@ -48,8 +48,8 @@ export class UsersService {
     return Math.random().toFixed(digit).split('.')[1];
   }
 
-  async findOne(id: number) {
-    return await this.userRepository.findOne({ where: { id: id } });
+  async findOne(phone: string) {
+    return await this.userRepository.findOne({ where: { phone: phone } });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
