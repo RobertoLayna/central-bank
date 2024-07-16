@@ -16,11 +16,12 @@ import { Card } from './accounts/entities/card.entity';
 import { Transference } from './transferences/entities/transference.entity';
 
 const Database: TypeOrmModuleOptions = {
-  type: 'postgres', host: 'ep-steep-hall-a4r83u54.us-east-1.aws.neon.tech',
-  port: 5432,
-  username: 'default',
-  password: 'W7HbQwVtUi6M',
-  database: 'verceldb',
+  type: 'mysql',
+  host: 'localhost',
+  port: 3306,
+  username: 'root',
+  password: '',
+  database: 'central_bank',
   synchronize: true,
   entities: [Bank, User, Account, Card, Transference],
 };
@@ -42,4 +43,4 @@ const Database: TypeOrmModuleOptions = {
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

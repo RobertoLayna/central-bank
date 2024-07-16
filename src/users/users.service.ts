@@ -13,7 +13,7 @@ export class UsersService {
     private userRepository: Repository<User>,
     @Inject(AccountsService)
     private readonly accountService: AccountsService,
-  ) { }
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const newUser: User = {
@@ -52,8 +52,11 @@ export class UsersService {
     return await this.userRepository.findOne({ where: { phone: phone } });
   }
 
+  async findOneById(id: number) {
+    return await this.userRepository.findOne({ where: { id: id } });
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     return await this.userRepository.update({ id: id }, updateUserDto);
   }
-
 }
