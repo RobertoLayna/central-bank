@@ -14,6 +14,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from 'src/auth/constants';
 import { info, log } from 'console';
 import { User } from './entities/user.entity';
+import { UpdateResult } from 'typeorm';
 
 @Controller('users')
 export class UsersController {
@@ -45,7 +46,21 @@ export class UsersController {
   }
 
   @Patch()
-  update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(req.user.id, updateUserDto);
+  async update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
+    let result: any;
+    try {
+      result = await this.usersService.update(req.user.id, updateUserDto);
+    } catch (err) {
+      return { status: 'Fail', message: 'Error al actualizar usuario' };
+    }
+
+    info(result);
+    return {
+      status: 'Success',
+      message:
+        (result as UpdateResult).affected > 0
+          ? 'Usuario actualizado'
+          : 'No se actualizo ningun dato',
+    };
   }
 }
