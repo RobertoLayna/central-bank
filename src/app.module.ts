@@ -14,6 +14,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { Account } from './accounts/entities/account.entity';
 import { Card } from './accounts/entities/card.entity';
 import { Transference } from './transferences/entities/transference.entity';
+import { MovementsModule } from './movements/movements.module';
+import { ContactsModule } from './contacts/contacts.module';
+import { WithdrawalModule } from './withdrawal/withdrawal.module';
 
 const Database: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -33,6 +36,9 @@ const Database: TypeOrmModuleOptions = {
     TransferencesModule,
     AccountsModule,
     AuthModule,
+    MovementsModule,
+    ContactsModule,
+    WithdrawalModule,
   ],
   controllers: [AppController],
   providers: [
